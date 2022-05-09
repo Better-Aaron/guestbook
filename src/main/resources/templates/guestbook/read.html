@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+    <th:block th:fragment="content">
+        <h1 class="mt-4">Guestbook Read Page</h1>
+
+        <div class="form-group">
+            <label>Id</label>
+            <input type="text" class="form-control" name="id" th:value="${dto.id}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            <textarea class="form-control" rows="5" name="content" readonly>[[${dto.content}]]</textarea>
+        </div>
+        <div class="form-group">
+            <label>Writer</label>
+            <input type="text" class="form-control" name="writer" th:value="${dto.writer}" readonly>
+        </div>
+        <div class="form-group">
+            <label>CreatedAt</label>
+            <input type="text" class="form-control" name="createdAt" th:value="${#temporals.format(dto.createdAt, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+        <div class="form-group">
+            <label>UpdatedAt</label>
+            <input type="text" class="form-control" name="updatedAt" th:value="${#temporals.format(dto.updatedAt, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+
+        <a th:href="@{/guestbook/modify(id = ${dto.id}, page=${requestDTO.page})}">
+            <button type="button" class="btn btn-primary">Modify</button>
+        </a>
+        <a th:href="@{/guestbook/list(page=${requestDTO.page})}">
+            <button type="button" class="btn btn-info">List</button>
+        </a>
+    </th:block>
+</th:block>
